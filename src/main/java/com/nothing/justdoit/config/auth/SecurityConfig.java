@@ -30,8 +30,9 @@ public class SecurityConfig{
         //h2-console 화면을 사용하기 위해 해당 옵션들 비활성화
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .headers(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/profile").permitAll()//모두허용
+                        .requestMatchers("/**", "/css/**", "/images/**","/h2-console/**", "/js/**", "/profile").permitAll()//모두허용
                         .requestMatchers("/api/v1/**").hasRole(Role.GUEST.name())//USER만 허용
                         .anyRequest()
                         .authenticated())
