@@ -35,11 +35,11 @@ public class IndexController {
 
     @GetMapping("/posts/save")
     public String postsSave(Model model, @LoginUser SessionUser user){
-
         if (user != null) {
             model.addAttribute("userName", user.getName());
             return "posts-save";
         }else{
+            model.addAttribute("posts", postsService.findAllDesc());
             model.addAttribute("login_alert", "로그인 해주세요.");
             return "index";
         }
