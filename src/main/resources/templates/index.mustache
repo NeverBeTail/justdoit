@@ -1,42 +1,77 @@
 {{>layout/header}}
-
-<h1>Nothing-JustDoIt</h1>
+{{#login_alert}}
+<input type="hidden" id="login_alert" value="{{login_alert}}"/>
+{{/login_alert}}
 <div class="col-md-12">
-    <div class="row">
-        <div class="col-md-6">
-            <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="/"></use>
+                </svg>
+                <span class="fs-4">Nothing-JustDoIt</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="/posts/save" role="button" class="btn btn-primary rounded-pill px-3">글 등록</a>
+                </li>
             {{#userName}}
-                Logged in as: <span id="user">{{userName}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                <li class="nav-item">
+                    <span id="user" class="btn btn-light rounded-pill px-3">
+                        {{userName}}
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="btn btn-danger rounded-pill px-3" role="button">
+                        Logout
+                    </a>
+                </li>
             {{/userName}}
             {{^userName}}
-                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
-                <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                 <li class="nav-item">
+                     <a href="/oauth2/authorization/google" class="btn btn-success rounded-pill px-3" role="button">
+                         Google Login
+                     </a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="/oauth2/authorization/naver" class="btn btn-success rounded-pill px-3" role="button">
+                         Naver Login
+                     </a>
+                 </li>
             {{/userName}}
-        </div>
+            </ul>
+        </header>
     </div>
+
     <br>
     <!-- 목록 출력 영역 -->
-    <table class="table table-horizontal table-bordered">
-        <thead class="thead-strong">
-        <tr>
-            <th>게시글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>최종수정일</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        {{#posts}}
+    <div class="container">
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
             <tr>
-                <td>{{id}}</td>
-                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
-                <td>{{author}}</td>
-                <td>{{modifiedDate}}</td>
+                <th style="text-align:center">게시글번호</th>
+                <th style="text-align:center">제목</th>
+                <th style="text-align:center">작성자</th>
+                <th style="text-align:center">최종수정일</th>
             </tr>
-        {{/posts}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="tbody">
+            {{#posts}}
+                <tr>
+                    <td style="text-align:center">{{id}}</td>
+                    <td style="text-align:center"><a href="/posts/update/{{id}}">{{title}}</a></td>
+                    <td style="text-align:center">{{author}}</td>
+                    <td style="text-align:center">{{modifiedDate}}</td>
+                </tr>
+            {{/posts}}
+            </tbody>
+        </table>
+    </div>
 </div>
-
+<script>
+		var message = document.getElementById('login_alert').value;
+		console.log(message);
+		alert(message);
+</script>
 {{>layout/footer}}

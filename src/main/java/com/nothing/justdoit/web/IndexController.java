@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Objects;
 
 
 @RequiredArgsConstructor
@@ -25,11 +26,9 @@ public class IndexController {
     public String index(Model model, @LoginUser SessionUser user) {
 
         model.addAttribute("posts", postsService.findAllDesc());
-        System.out.println("user : " + user);
         if (user != null) {
 
             model.addAttribute("userName", user.getName());
-            System.out.println(user.getEmail());
         }
         return "index";
     }
@@ -37,15 +36,31 @@ public class IndexController {
     @GetMapping("/posts/save")
     public String postsSave(Model model, @LoginUser SessionUser user){
 
-        model.addAttribute("userName", user.getName());
-        return "posts-save";
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            return "posts-save";
+        }else{
+            model.addAttribute("login_alert", "로그인 해주세요.");
+            return "index";
+        }
+
     }
 
 
     @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id,Model model){
+    public String postsUpdate(@PathVariable Long id,Model model,@LoginUser SessionUser user){
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post",dto);
+        model.addAttribute("sameUser", false);
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            if (Objects.equals(dto.getAuthor(), user.getName())) {
+                model.addAttribute("sameUser", true);
+            }
+        }
+
+
         return "posts-update";
     }
 }

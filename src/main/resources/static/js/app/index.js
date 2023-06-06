@@ -2,15 +2,36 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
-            _this.save();
+            if($('#title').val() == ""){
+                alert("제목이 비어있습니다.");
+            }else if($('#author').val() == ""){
+                alert("작성자가 비어있습니다.");
+            }else if($('#content').val() == ""){
+                alert("내용이 비어있습니다.");
+            }else{
+                _this.save();
+            }
         });
 
         $('#btn-update').on('click', function () {
-            _this.update();
+            if($('#title').val() == ""){
+                  alert("제목이 비어있습니다.");
+            }else if($('#author').val() == ""){
+                  alert("작성자가 비어있습니다.");
+            }else if($('#content').val() == ""){
+                  alert("내용이 비어있습니다.");
+            }else{
+                  _this.update();
+            }
         });
 
         $('#btn-delete').on('click', function () {
-            _this.delete();
+
+             if($('#author').val()!=$('#btn-delete').val()){
+                  alert("사용자가 다릅니다.");
+             }else{
+                  _this.delete();
+             }
         });
     },
     save : function () {
@@ -69,7 +90,7 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
 
 };
 

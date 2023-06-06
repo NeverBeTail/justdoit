@@ -2,6 +2,7 @@ package com.nothing.justdoit.config.auth;
 
 
 import com.nothing.justdoit.domain.user.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 
 
@@ -15,14 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @EnableWebSecurity  //설정 활성화
+@RequiredArgsConstructor
 @Configuration
 public class SecurityConfig{
 
     private final CustomOAuth2UserService customOAuth2UserService;
-
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
-        this.customOAuth2UserService = customOAuth2UserService;
-    }
 
 
     @Bean
@@ -44,8 +42,5 @@ public class SecurityConfig{
 
         return http.build();
     }
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers("/h2-console/**");
-    }
+
 }
