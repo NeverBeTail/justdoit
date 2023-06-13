@@ -19,7 +19,6 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 
 @ExtendWith(SpringExtension.class)
-@EnableJpaAuditing
 @SpringBootTest
 public class PostsRepositoryTest {
 
