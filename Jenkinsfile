@@ -12,11 +12,6 @@ pipeline {
 				checkout scm
 			}
 		}
-		stage("Build") {
-        	steps {
-                sh './gradlew build'
-        	}
-        }
         stage('Building our image') {
             steps {
                   script {
