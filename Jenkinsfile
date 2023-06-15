@@ -2,7 +2,7 @@ pipeline {
 
 	environment {
             repository = "neverbetail/justdoit" //docker hub id와 repository 이름
-            DOCKERHUB_CREDENTIALS = credentials('neverbetail') // jenkins에 등록해 놓은 docker hub credentials 이름
+            DOCKERHUB_CREDENTIALS = credentials('DokcerHub') // jenkins에 등록해 놓은 docker hub credentials 이름
             dockerImage = ''
     }
     agent any
