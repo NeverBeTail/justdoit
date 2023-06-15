@@ -1,13 +1,13 @@
-
 pipeline {
-	agent any
+
 	environment {
             repository = "neverbetail/justdoit" //docker hub id와 repository 이름
             DOCKERHUB_CREDENTIALS = credentials('Dockerhub') // jenkins에 등록해 놓은 docker hub credentials 이름
             dockerImage = ''
-      }
+    }
+    agent any
     stages {
-		stage("CheckSum") {
+	    stage("CheckSum") {
 			steps {
 				checkout scm
 			}
@@ -17,11 +17,10 @@ pipeline {
                 sh './gradlew build'
         	}
         }
-
         stage('Building our image') {
             steps {
                   script {
-                        sh "cp /var/jenkins_home/workspace/justdoit_pipe/build/libs/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/" // war 파일을 현재 위치로 복사
+                        sh 'cp /var/jenkins_home/workspace/justdoit_pipe/build/libs/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/' // war 파일을 현재 위치로 복사
                         dockerImage = docker.build repository + ":$BUILD_NUMBER"
                   }
             }
