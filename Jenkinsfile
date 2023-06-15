@@ -20,7 +20,7 @@ pipeline {
                   }
             }
         }
-        /* stage('Login'){
+         stage('Login'){
             steps{
                   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
             }
@@ -36,6 +36,6 @@ pipeline {
         	steps {
                   sh "docker rmi $repository:$BUILD_NUMBER" // docker image 제거
             }
-        } */
+        }
 	}
 }
