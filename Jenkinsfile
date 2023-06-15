@@ -20,12 +20,12 @@ pipeline {
         stage('Building our image') {
             steps {
                   script {
-                        sh 'cp /var/jenkins_home/workspace/justdoit_pipe/build/libs/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/' // war 파일을 현재 위치로 복사
+                        sh "cp /var/jenkins_home/workspace/justdoit_pipe/build/libs/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/" // war 파일을 현재 위치로 복사
                         dockerImage = docker.build repository + ":$BUILD_NUMBER"
                   }
             }
         }
-        stage('Login'){
+        /* stage('Login'){
             steps{
                   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
             }
@@ -41,6 +41,6 @@ pipeline {
         	steps {
                   sh "docker rmi $repository:$BUILD_NUMBER" // docker image 제거
             }
-        }
+        } */
 	}
 }
