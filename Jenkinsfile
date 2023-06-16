@@ -9,11 +9,6 @@ pipeline {
     agent any
 
     stages {
-	    stage("CheckSum") {
-			steps {
-				checkout scm
-			}
-		}
         stage('docker-build'){
                     steps {
                         echo 'Build Docker'
