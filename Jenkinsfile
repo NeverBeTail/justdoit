@@ -13,13 +13,9 @@ pipeline {
                     steps {
                         echo 'Build Docker'
                         sh 'cp /var/jenkins_home/workspace/justdoit/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/'
-                        dir('workspace/justdoit_pipe'){
-                            script {
+                        script {
+                            dockerImage = docker.build imageName
 
-                                sh "pwd"
-                                dockerImage = docker.build imageName
-
-                            }
                         }
                     }
                 }
