@@ -33,7 +33,7 @@ pipeline {
         stage('Cleaning up') {
         	steps {
                   sh "docker rmi $repository:$BUILD_NUMBER" // docker image 제거
-
+            }
         }
 	}
 }
