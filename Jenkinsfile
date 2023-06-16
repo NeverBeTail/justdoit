@@ -28,8 +28,9 @@ pipeline {
              steps{
                    echo 'Push Docker'
                    script {
-                   docker.withRegistry('', registryCredential){
-                         dockerImage.push("1.0")
+                        docker.withRegistry('', registryCredential){
+                        dockerImage.push("1.0")
+                        }
                    }
              }
         }
