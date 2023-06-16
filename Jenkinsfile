@@ -17,9 +17,10 @@ pipeline {
         stage('docker-build'){
                     steps {
                         echo 'Build Docker'
-                        cp '/var/jenkins_home/workspace/justdoit/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/'
+
                         dir('workspace/justdoit_pipe'){
                             script {
+                                sh "cp '/var/jenkins_home/workspace/justdoit/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/'"
                                 sh "pwd"
                                 dockerImage = docker.build imageName
 
