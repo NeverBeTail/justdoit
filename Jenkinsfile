@@ -17,10 +17,7 @@ pipeline {
         stage('Building our image') {
             steps {
                   script {
-                        sh "java --version"
-                        sh "./gradlew -version"
-                        sh "chmod +x gradlew"
-                        sh "./gradlew clean build"
+                        sh "./pipline_build.sh"
                         sh "cp /var/jenkins_home/workspace/justdoit_pipe/build/libs/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/" // war 파일을 현재 위치로 복사
                         dockerImage = docker.build repository + ":$BUILD_NUMBER"
                   }
