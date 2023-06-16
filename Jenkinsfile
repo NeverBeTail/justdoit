@@ -9,24 +9,15 @@ pipeline {
     agent any
 
     stages {
-        stage ("first") {
-                    tools {
-                       jdk "java-17"
-                    }
-                    steps {
-                        sh 'java -version'
-                    }
-        }
 	    stage("CheckSum") {
 			steps {
 				checkout scm
 			}
 		}
-        stage('Building our image') {
+        stage('image') {
             steps {
                   script {
-                        sh "./pipline_build.sh"
-                        sh "cp /var/jenkins_home/workspace/justdoit_pipe/build/libs/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/" // war 파일을 현재 위치로 복사
+                        sh "cp /var/jenkins_home/workspace/justdoit/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/" // war 파일을 현재 위치로 복사
                         dockerImage = docker.build repository + ":$BUILD_NUMBER"
                   }
             }
