@@ -1,8 +1,8 @@
 pipeline {
 
 	environment {
-            repository = "neverbetail/justdoit" //docker hub id와 repository 이름
-            DOCKERHUB_CREDENTIALS = credentials('DockerHub_credentials') // jenkins에 등록해 놓은 docker hub credentials 이름
+            imageName = "neverbetail/justdoit" //docker hub id와 repository 이름
+            registryCredential = 'DockerHub_credentials' // jenkins에 등록해 놓은 docker hub credentials 이름
             dockerImage = ''
     }
 
@@ -14,14 +14,19 @@ pipeline {
 				checkout scm
 			}
 		}
-        stage('image') {
-            steps {
-                  script {
-                        sh "cp /var/jenkins_home/workspace/justdoit/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/" // war 파일을 현재 위치로 복사
-                        dockerImage = docker.build repository + ":$BUILD_NUMBER"
-                  }
-            }
-        }
+        stage('docker-build'){
+                    steps {
+                        echo 'Build Docker'
+                        cp '/var/jenkins_home/workspace/justdoit/justdoit-0.0.1-SNAPSHOT.jar /var/jenkins_home/workspace/justdoit_pipe/'
+                        dir('workspace/justdoit_pipe'){
+                            script {
+                                sh "pwd"
+                                dockerImage = docker.build imagename
+
+                            }
+                        }
+                    }
+                }
          stage('Login'){
             steps{
                   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
