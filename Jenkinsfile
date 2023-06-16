@@ -9,6 +9,14 @@ pipeline {
     agent any
 
     stages {
+        stage ("first") {
+                    tools {
+                       jdk "java-17"
+                    }
+                    steps {
+                        sh 'java -version'
+                    }
+        }
 	    stage("CheckSum") {
 			steps {
 				checkout scm
