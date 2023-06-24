@@ -40,7 +40,7 @@ pipeline {
                         echo 'SSH'
 
                         sshagent(credentials: ['ec2-ssh']) {
-                            sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.124.152.182 "cd pwd"'
+                            sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.124.152.182 "pwd"'
                             sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.124.152.182 "docker pull neverbetail/justdoit:1.0"'
                             sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.124.152.182 "docker run neverbetail/justdoit:1.0"'
                         }
