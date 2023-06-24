@@ -39,10 +39,10 @@ pipeline {
                     steps {
                         echo 'SSH'
 
-                        sshagent(credentials: ['ECGumD208']) {
-                            sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.79.219.150 "justdoit"'
-                            sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.79.219.150 "docker pull neverbetail/justdoit:1.0"'
-                            sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.79.219.150 "docker run neverbetail/justdoit:1.0"'
+                        sshagent(credentials: ['ec2-ssh']) {
+                            sh 'ssh -o StrictHostKeyChecking=no justdoit@13.124.152.182 "justdoit"'
+                            sh 'ssh -o StrictHostKeyChecking=no justdoit@13.124.152.182 "docker pull neverbetail/justdoit:1.0"'
+                            sh 'ssh -o StrictHostKeyChecking=no justdoit@13.124.152.182 "docker run neverbetail/justdoit:1.0"'
                         }
                     }
                 }
