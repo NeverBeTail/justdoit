@@ -39,7 +39,7 @@ pipeline {
               steps {
                     sh "docker container stop justdoit" // docker  제거
                     sh "docker container rm justdoit"
-                    sh "docker idocker rmi $(docker images --filter=reference="neverbetail/justdoit" -q)"
+                    sh "docker idocker rmi $(docker images --filter=reference='neverbetail/justdoit' -q)"
 
               }
         }
