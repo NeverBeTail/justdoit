@@ -38,7 +38,7 @@ pipeline {
         stage('Container Stop&Remove') {
               steps {
                     sh "docker container stop justdoit" // docker  제거
-                    sh "docker conatiner prune"
+                    sh "docker container prune"
                     sh "docker image prune"
 
               }
