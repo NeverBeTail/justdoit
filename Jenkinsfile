@@ -38,8 +38,8 @@ pipeline {
         stage('Container Stop&Remove') {
               steps {
                     sh "docker container stop justdoit" // docker  제거
-                    sh "docker container prune"
-                    sh "docker image prune"
+                    sh "docker container rm justdoit"
+                    sh "docker idocker rmi $(docker images --filter=reference=\"neverbetail/justdoit\" -q)"
 
               }
         }
