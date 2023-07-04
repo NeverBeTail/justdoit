@@ -38,7 +38,9 @@ pipeline {
         stage('Container Stop&Remove') {
               steps {
                     sh "docker container stop justdoit" // docker  제거
-                    sh "docker prune"
+                    sh "docker conatiner prune"
+                    sh "docker image prune"
+
               }
         }
         stage('EC2-Pull&Deploy'){
