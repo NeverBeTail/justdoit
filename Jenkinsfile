@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Cleaning up') {
         		  steps {
-                      sh "docker rmi neverbetail/justdoit" // docker image 제거
+                      sh "docker container prune" // docker image 제거
                   }
               }
         stage('EC2-Pull&Deploy'){
